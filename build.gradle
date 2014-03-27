@@ -2,7 +2,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 
 group = 'nl.eveoh'
-version = '1.5'
+version = '1.4-OK-1'
 
 repositories {
     maven {
@@ -22,15 +22,15 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url "https://maven.eveoh.nl/content/repositories/releases"
-            if (project.hasProperty('mavenUser')) {
-                credentials {
-                    username mavenUser
-                    password mavenPass
-                }
-            }
-        }
+//        maven {
+//            url "https://maven.eveoh.nl/content/repositories/releases"
+//            if (project.hasProperty('mavenUser')) {
+//                credentials {
+//                    username mavenUser
+//                    password mavenPass
+//                }
+//            }
+//        }
     }
 }
 
