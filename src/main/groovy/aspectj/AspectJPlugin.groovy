@@ -52,6 +52,7 @@ class AspectJPlugin implements Plugin<Project> {
                 outputs.dir(sourceSet.output.classesDir)
                 aspectPath = project.configurations.aspectpath
                 ajInpath = project.configurations.ajInpath
+                encoding = project.tasks.compileJava.options.encoding
             }
 
             project.tasks.compileAspect.setDependsOn(project.tasks.compileJava.dependsOn)
@@ -68,6 +69,7 @@ class AspectJPlugin implements Plugin<Project> {
                 outputs.dir(sourceSet.output.classesDir)
                 aspectPath = project.configurations.testAspectpath
                 ajInpath = project.configurations.testAjInpath
+                encoding = project.tasks.compileTestJava.options.encoding
             }
 
             project.tasks.compileTestAspect.setDependsOn(project.tasks.compileTestJava.dependsOn)
@@ -89,6 +91,7 @@ class Ajc extends DefaultTask {
     String xlint = 'ignore'
 
     String maxmem
+    String encoding
 
     Ajc() {
         logging.captureStandardOutput(LogLevel.INFO)
@@ -115,6 +118,9 @@ class Ajc extends DefaultTask {
 
         if (maxmem != null) {
             iajcArgs['maxmem'] = maxmem
+        }
+        if (encoding != null) {
+            iajcArgs['encoding'] = encoding
         }
 
         ant.taskdef(resource: "org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: project.configurations.ajtools.asPath)
